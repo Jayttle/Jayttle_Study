@@ -1,0 +1,97 @@
+作用域：
+1.如果嵌套类在私有部分声明：
+Queue成员可以使用Node对象和Node对象的指针，但是程序的其他部分不知道存在Node类
+对于Queue派生类也是不可见的（派生类不能直接访问基类的私有部分）
+2.如果嵌套类在保护部分声明：
+对于外部不可见但是派生类将知道嵌套类，并可以直接创建这种类型对象；
+3.公有部分
+都可使用，必须加上类限定符。
+#ifndef QUEUETP_H_
+#define QUEUETP_H_
+template<class Item>
+class QueueTP
+{
+private:
+	enum { Q_SIZE = 10 };
+	class Node
+	{
+	public:
+		Item item;
+		Node *next;
+		Node(const Item &i)
+			:item(i), mext(0) {};
+	};
+	Node *front;
+	Node *rear;
+	int items;
+	const int qsize;
+	QueueTP(const QueueTP &q)
+		:qsize(0) {};
+	QueueTP &operator=(const QueueTP &q)
+	{
+		return *this;
+	};
+public:
+	QueueTP(int qs = Q_SIZE);
+	~QueueTP();
+	bool isempty()const
+	{
+		return items == 0;
+	}
+	bool isfull()const
+	{
+		return items == Q_SIZE;
+	}
+	int queuecount()const
+	{
+		return items;
+	}
+	bool enqueue(const Item &item);
+	bool dequeue(Item &item);
+};
+template<class Item>
+QueueTP<Item>::QueueTP(int qs) :qsize(qs)
+{
+	front = rear = 0;
+	items = 0;
+}
+template<class Item>
+QueueTP<Item>::~QueueTP()
+{
+	Node *temp;
+	while (front != 0)
+	{
+		temp = front;
+		front = front->next;
+		delete temp;
+	}
+}
+template<class Item>
+bool QueueTP<Item>::enqueue(const Item &item)
+{
+	if (isfull())
+		return false;
+	Node *add = new Node(item);
+	items++;
+	if (front == 0)
+		front = add;
+	else
+		rear->next = add;
+	rear = add;
+	return true;
+}
+template<class Item>
+bool QueueTP<Item>::dequeue(Item &item)
+{
+	if (front == 0)
+		return false;
+	item = front->iteml;
+	items--;
+	Node *temp = front;
+	front = front->next;
+	delete temp;
+	if (items == 0)
+		rear = 0;
+	return true;
+}
+#endif // !QUEUETP_H_

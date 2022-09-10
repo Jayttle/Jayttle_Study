@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+/*值传递与指针传递的区别
+当编写一个值传递时他不会对数据内部进行赋值与修改
+而地址传递则会有
+另一种：arr[]数组本身就是地址，所以在函数体与指针传递一致
+要保证数组不被改变可以加：const double arr[]
+又有cin>>(*pa)[i];这是array数组的
+*/
+struct box
+{
+	char maker[40];
+	float height; 
+	float width;
+	float length;
+	float volume;
+};
+void set_box(box *p_b);
+void show(box b);
+void setbox(box p_b);
+int main(void)
+{
+	box b = { "cube",3,4,5 };
+	set_box(&b);
+	show(b);
+	box bc = { "bcc",4,5,5};
+	setbox(bc);
+	show(bc);
+	return 0;
+}
+
+void set_box(box *p_b)
+{
+	p_b->volume = p_b->height*p_b->width*p_b->length;
+}
+
+void show(box b)
+{
+	cout << "maker:" << b.maker << endl;
+	cout << "height:" << b.height << endl;
+	cout << "width:" << b.width << endl;
+	cout << "length:" << b.length << endl;
+	cout << "volume:" << b.volume << endl;
+}
+
+void setbox(box p_b)
+{
+	p_b.volume = p_b.height*p_b.width*p_b.length;
+}
+/*运行结果如下：
+maker:cube
+height:3
+width:4
+length:5
+volume:60
+maker:bcc
+height:4
+width:5
+length:5
+volume:0
+bcc的volume没有值的存在
+*/

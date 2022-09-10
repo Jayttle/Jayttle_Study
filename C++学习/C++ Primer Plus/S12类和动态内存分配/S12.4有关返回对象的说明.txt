@@ -1,0 +1,17 @@
+//version1
+Vector Max(const Vector &v1,const Vector &v2)
+{
+	if(v1.magval()>v2.magval())
+		return v1;
+	else
+		return v2;
+}
+//version2
+const Vector &Max(const Vector &v1,const Vector &v2)
+{
+	if(v1.magval()>v2.magval())
+		return v1;
+	else
+		return v2;
+}
+1.返回对象将调用复制构造函数，而返回引用不会。因此version2所做的工作更少，效率更高。

@@ -1,0 +1,9 @@
+	explicit Student(const std::string &s)
+		:name(s), scores() {};
+	explicit Student(int n)
+		:name("Null Student"), scores(n) {};
+在如下代码中：
+Student doh("Homer",10);
+doh=5;
+如果构造函数省略了explicit，则将使用构造函数Student(5)用5临时转换为一个临时Student对象；
+并以此赋值来替换原来的doh值，使用了explicit，则上述赋值运算符是错误的；

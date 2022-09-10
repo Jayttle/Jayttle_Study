@@ -1,0 +1,29 @@
+1.不必在类声明中使用关键字private，因为是默认访问控制
+class world
+{
+	float mass;
+	char name[20];
+public:
+	void tellall(void);
+	...
+}
+2.private内数据受到保护，只能由成员函数来修改；
+一般private内是数据，若有函数则将他写完整：
+class 
+{
+private:
+	long shares;
+	double share_val;
+	double total_val;
+	void set_tot() //仅供成员函数使用，在main()中无法直接调用；
+ 	{
+		total_val=shares*share_val;
+	}
+}
+public:
+	...
+因此不能够直接初始化。需要用到构造函数与析构函数
+
+3.直接成员运算符（ . ）
+简接成员运算符（ -> ） //通常是因为对象生成的是使用了new： Stock *pik=new Stock；则pik->成员函数
+作用域解析运算符（ :: ）

@@ -1,0 +1,130 @@
+重载运算符的限制：
+1.必须至少有一个操作数是用户定义的类型
+2.不能违法原来运算符的句法规则
+3.不能创建新运算符
+4.不能重载部分特定运算符：略
+5.部分运算符只能由成员函数进行重载：= 、 （）、【】 、->;
+
+//mytime.h
+#pragma once
+#ifndef MYTIME2_H_
+#define MYTIME2_H_
+
+class Time
+{
+private:
+	int hours;
+	int minutes;
+public:
+	Time();
+	Time(int h, int m = 0);
+	void AddMin(int m);
+	void ADDHr(int h);
+	void Reset(int h = 0, int m = 0);
+	Time operator+(const Time &t) const;
+	Time operator-(const Time &t) const;
+	Time operator*(double n)const;
+	void Show() const;
+};
+#endif
+
+//mytime.cpp
+#include<iostream>
+#include"mytime2.h"
+
+Time::Time()
+{
+	hours = minutes = 0;
+}
+
+Time::Time(int h, int m)
+{
+	hours = h;
+	minutes = m;
+}
+
+void Time::AddMin(int m)
+{
+	minutes += m;
+	hours += minutes / 60;
+	minutes %= 60;
+}
+
+void Time::ADDHr(int h)
+{
+	hours += h;
+}
+void Time::Reset(int h, int m)
+{
+	hours = h;
+	minutes = m;
+}
+Time Time::operator+(const Time &t)const
+{
+	Time sum;
+	sum.minutes = this->minutes + t.minutes;
+	sum.hours = this->hours + t.hours + sum.minutes / 60;
+	sum.minutes %= 60;
+	return sum;
+}
+Time Time::operator-(const Time &t)const
+{
+	Time diff;
+	int tot1,tot2;
+	tot1 = t.minutes + 60 * t.hours;
+	tot2 =this->minutes+ 60 * this->hours;
+	diff.minutes = (tot2 - tot1) % 60;
+	diff.hours = (tot2 - tot1) / 60;
+	return diff;
+}
+Time Time::operator*(double n)const
+{
+	Time result;
+	long totalminutes = this->hours*n*60 + this->minutes*n;
+	result.hours = totalminutes / 60;
+	result.minutes = totalminutes % 60;
+	return result;
+}
+void Time::Show() const
+{
+	std::cout << hours << " hours," << minutes << " minutes";
+}
+
+//usemytime.cpp
+#include<iostream>
+#include"mytime2.h"
+int main()
+{
+	using std::cout;
+	using std::endl;
+	Time weeding(4, 35);
+	Time waxing(2, 47);
+	Time total;
+	Time diff;
+	Time adjusted;
+
+	cout << "weeding time=";
+	weeding.Show();
+	cout << endl;
+
+	cout << "waxing time=";
+	waxing.Show();
+	cout << endl;
+
+	cout << "total work time=";
+	total = weeding + waxing;
+	total.Show();
+	cout << endl;
+
+	diff = weeding - waxing;
+	cout << "weeding-waxing=";
+	diff.Show();
+	cout << endl;
+
+	adjusted = total * 1.5;
+	cout << "adjusted work time=";
+	adjusted.Show();
+	cout << endl;
+
+	return 0;
+}

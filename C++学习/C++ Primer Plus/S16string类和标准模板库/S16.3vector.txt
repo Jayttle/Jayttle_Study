@@ -1,0 +1,28 @@
+vector可操作：
+size() //返回容器中元素数目
+swap() //交换两个容器的内容
+begin() //返回一个指向容器中的第一个元素的迭代器
+end() //返回一个表示超过容器尾的迭代器
+push_back()//将元素添加到矢量末尾
+erase()//删除矢量中给定区间的元素   //scores.erase(scores.begin(),scores.begin()+2);
+insert() //接受3个迭代器参数，第一个参数指定新元素的插入位置，第二个和第三个迭代器参数定义被插入区间。
+
+具有代表性的3个STL函数：
+for_each()
+random_shuffle()
+sort()
+
+for_each():接受3个参数，前两个是定义容器中区间的迭代器，最有一个是指向函数的指针（函数对象）
+将被指向的函数应用于容器区间中的各个元素：
+vector<Review>::iterator pr;
+for(pr=books.begin();pr!=books.end();pr++)
+	ShowReview(*pr);
+替换为
+for_each(books.begin(),books.end(),ShowReview);
+
+Random_shuffle()函数怒接受两个指定区间的迭代器参数，并随即排列该区间中的元素。
+例如：随机排列books矢量中所有元素：
+random_shuffle(books.begin(),books.end());
+
+将下面的语句饱饭Review对象的books矢量按rating升序排序
+sort(books.begin(),books.end(),WorseThan);

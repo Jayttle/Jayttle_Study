@@ -1,0 +1,3 @@
+MI小结：
+如果不适用虚基类，需要用类限定符来区分：Gunslinger::draw(),PokerPlayer::draw();
+在必要的时候对继承的名称进行限定；

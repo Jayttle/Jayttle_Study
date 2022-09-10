@@ -1,0 +1,18 @@
+在：
+class Bakeryt
+{
+private:
+	const int Months=12;
+	double costs[Months];
+	...
+}
+是行不通的，因为声明类只是描述对象的形式，并没有创建对象。
+因此采用static，将该常量与其他静态变量存储在一起，而不是存储在对象中。
+所以Months常量可以被所有的Bakery对象共享；
+class Bakeryt
+{
+private:
+	static const int Months=12;
+	double costs[Months];
+	...
+}

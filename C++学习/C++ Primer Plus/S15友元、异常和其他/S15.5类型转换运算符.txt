@@ -1,0 +1,12 @@
+1.dynamic_cast;
+2.const_cast; 
+3.static_cast;
+4.reinterpret_cast;
+
+//const_cast
+ //只有一种用途的类型转换，即改变值为const或volatile，其语法与dynamic_cast相同
+High bar;
+const High *pbar=&bar;
+High *pb=const_cast<High *>(pbar); //正确 并删除const标签
+const Low *p1=const_cast<const Low *>(pbar);//错误
+

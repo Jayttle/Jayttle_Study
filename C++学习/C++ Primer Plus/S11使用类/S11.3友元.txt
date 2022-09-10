@@ -1,0 +1,40 @@
+1.友元仅在类声明中使用friend关键字
+class Time
+{
+private:
+	int hours;
+	int minutes;
+public:
+	Time();
+	Time(int h, int m = 0);
+	Time operator*(double n)const; 
+//仅保证了 Time型*double型能计算
+//而double型*Time型则会编译失败，此时友元起到了作用：
+	friend Time operator*(double m,const Time &t)
+	{	return t*m;		}
+//友元又让double型*Time型转成->Time型*double型
+};
+/*
+对于成员函数（Time operator*(double n)const; ） 来说：
+一个操作数通过this指针隐式地传递
+另一个操作数通过作为函数参数显式地传递；
+对于友元函数 friend Time operator*(double m,const Time &t) 来说：
+两个操作数都作为参数来传递；
+*/
+
+	friend std::ostream &
+		operator<<(std::ostream &os, const Vector &v);
+//友元+ostream将<<重载，使输出的时候直接就用 cout<<v<<endl;即可
+
+2.友元函数一般都是：
+// overloaded operator friends
+	friend bool operator<(const ImprovedString&, const ImprovedString&);
+	friend bool operator>(const ImprovedString&, const ImprovedString&);
+	friend bool operator==(const ImprovedString&, const ImprovedString&);
+	friend std::ostream& operator<<(std::ostream&, const ImprovedString&);
+	friend std::istream& operator>>(std::istream&, ImprovedString&);
+	friend ImprovedString operator+(char*, const ImprovedString&);
+*比大小
+*赋值==
+*ostream的输入输出
+*拓展加法运算

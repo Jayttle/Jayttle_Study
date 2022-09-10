@@ -1,0 +1,17 @@
+1.vect.h vect.cpp是重载完整的矢量化操作
+2.在：
+Vector Vector::operator*(double n)const
+{
+	return Vector(n*x,n*y)；
+}
+//创建一个无名的对象，更可靠简单；
+但是在：
+void Vector::reset(double n1, double n2, Mode form)
+	{
+		//*this=Vector(n1, n2, form);
+//使用构造函数会增加额外的步骤：创建一个临时对象再赋值；
+	}
+//因为是在void里，不return数据；
+
+3.复习题：
+https://zhuanlan.zhihu.com/p/25378168

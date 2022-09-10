@@ -1,0 +1,20 @@
+假设模板使用>符号来对值进行比较：
+对于数字，ok；定义：T::operator>()方法即可 
+对于const char *表示的字符串，要用类定义的strcmp进行比较
+在这种情况下，提供一个显示模板具体化：
+template<>class SortedArray<const char char *>
+{
+	...
+}
+部分具体化：
+//普通模板：
+template <class T1,class T2>class Pair {...}
+//部分具体化：
+template<class T1>class Pair<T1,int> {...};
+
+如果有多个模板提供选择，则编译器使用具体化程度最高的模板；
+亦可指针提供特殊版本来部分具体化现有的模板：
+template <class T>
+class Feeb {}
+template <class T*>
+class Feeb{}

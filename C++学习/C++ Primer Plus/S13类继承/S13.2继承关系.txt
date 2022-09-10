@@ -1,0 +1,7 @@
+继承关系：
+is-a关系、is-like-a关系、has-a关系、is-implemented-as-a关系、uses-a关系
+
+多态公有继承
+实现：
+*在派生类中重新定义基类的方法；
+*使用虚方法；

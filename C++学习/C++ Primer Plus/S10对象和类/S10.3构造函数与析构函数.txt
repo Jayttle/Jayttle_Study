@@ -1,0 +1,37 @@
+//构造函数一般与类的名称一样
+Stock::Stock(const string &co,long n,double pr)
+{
+	company=co;
+	...
+}
+//使用：
+Stock food=Stock("World Cannage",250,1.25); //显示的表达
+Stock food("World Cannage",250,1.25);//隐式的表达
+Stock *pstock=new Stock("World Cannage",250,1.25)//使用指针
+
+默认情况下的构造函数：
+Stock food;//不做任何操作的话，就是默认Stock::Stock(){ };
+要赋予值，可以使用默认参数：
+Stock::Stock()
+{
+	company="no name";
+	shares=0;
+	share_val=0;
+	total_val=0;
+}
+所以可以有：
+Stock first;
+Stock first=Stock();
+Stock *prelief=new Stock;
+
+析构函数：~Stock()
+//
+TableTennisPlayer::TableTennisPlayer(const string &fn,const string &ln,bool ht):firstname(fn),lastname(ln),hasTable(ht)
+{}
+等同于
+TableTennisPlayer::TableTennisPlayer(const string &fn,const string &ln,bool ht)
+{
+	firstname=fn;
+	lastname=ln;
+	hasTable=ht;
+}

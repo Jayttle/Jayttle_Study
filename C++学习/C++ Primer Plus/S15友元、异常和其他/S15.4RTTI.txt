@@ -1,0 +1,65 @@
+//就是对象的类型进行判断，根据不同的类对象进行不同操作
+//dynamic_cast是回答”是否可以安全地将对象的地址赋给特定类型地指针“
+//Super *pm=dynamic_cast<Superb*>(pg)
+//指针pg的类型是否可被安全地转换为Superb *；
+//如果可以运算符将返回对象地地址
+//否则返回一个空指针
+//派生对象的地址可以赋给基类指针；
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+using std::cout;
+class Grand
+{
+private:
+	int hold;
+public:
+	Grand(int h = 0) :hold(h) {};
+	virtual void Speak() const { cout << "I am a grand class!\n"; };
+	virtual int Value() const { return hold; };
+};
+class Superb :public Grand
+{
+public:
+	Superb(int h = 0) :Grand(h) {};
+	void Speak() const { cout << "I am a superb class!\n"; };
+	virtual void Say() const
+	{cout << "I hold the superb value of " << Value() << "!\n"; };
+};
+class Magnificent :public Superb
+{
+private:
+	char ch;
+public:
+	Magnificent(int h = 0, char c = 'A') :Superb(h), ch(c) {};
+	void Speak() const { cout << "I am a magnificent class!!!\n";}
+	void Say() const { cout << "I hold the character " << ch << " and the integer" << Value() << "!\n"; };
+};
+Grand *GetOne();
+
+int main()
+{
+	std::srand(std::time(0));
+	Grand *pg;
+	Superb *ps;
+	for (int i = 0; i < 5; i++)
+	{
+		pg = GetOne();
+		pg->Speak();
+		if (ps = dynamic_cast<Superb *>(pg))
+			ps->Say();
+	}
+	return 0;
+}
+Grand *GetOne()
+{
+	Grand *p;
+	switch (std::rand() % 3)
+	{
+	case 0:p = new Grand(std::rand() % 100);
+	case 1:p = new Superb(std::rand() % 100);
+	case 2:p = new Magnificent(std::rand() % 100, 'A' + std::rand() % 26);
+		break;
+	}
+	return p;	
+}

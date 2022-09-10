@@ -1,0 +1,29 @@
+#include<iostream>
+
+double add(double x, double y);
+double substract(double x, double y);
+double calculate(double x, double y, double(*pt)(double x, double y));
+using namespace std;
+int main(void)
+{
+	double result=calculate(2.5, 10.4, add);
+	cout << "The result of add is:" << result << endl;
+	result = calculate(10.4, 2.5, substract);
+	cout << "The result of substract is:" << result << endl;
+	return 0;
+}
+
+double add(double x, double y)
+{
+	return x + y;
+}
+
+double substract(double x, double y)
+{
+	return x - y;
+}
+
+double calculate(double x, double y, double(*pt)(double x, double y))//用(*pt)指代add与substract的函数名
+{
+	return pt(x, y);
+}

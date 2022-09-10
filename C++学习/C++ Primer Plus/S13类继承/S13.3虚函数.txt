@@ -1,0 +1,19 @@
+虚函数：
+如果没有使用关键字virtual，程序将根据引用类型或指针类型选择方法；“看的是引用，指针本身的类型：b1_ref,b2_ref”
+如果使用关键字virtual，程序将根据引用或指针指向的对象的类型来选择方法；“看的是指向的类型：dom，dot”
+
+1.如果不使用virtual虚函数：
+Brass  dom( ***)
+BrassPluse dot(***);
+Brass &b1_ref=dom;
+Brass &b2_ref=dot;
+b1_ref.ViewAcct();  //use Brass::ViewAcct();
+b2_ref.ViewAcct();  //use Brass::ViewAcct();
+
+2.如果使用virtual虚函数：
+Brass  dom( ***)
+BrassPluse dot(***);
+Brass &b1_ref=dom;
+Brass &b2_ref=dot;
+b1_ref.ViewAcct();  //use Brass::ViewAcct();
+b2_ref.ViewAcct();  //use BrassPluse::ViewAcct();

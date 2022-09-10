@@ -1,0 +1,71 @@
+/*一个头文件加两个源代码文件，构成最简单的头文件使用*/
+/*头文件coordin.h*/
+#ifndef COORDIN_H_
+#define COORDIN_H_
+
+struct polar
+{
+	double distance;
+	double angle;
+};
+
+struct rect
+{
+	double x;
+	double y;
+};
+
+polar rect_to_polar(rect xypos);
+void show_polar(polar dapos);
+
+#endif // !COORDIN_H_
+#pragma once
+/*
+为了防止头文件被重复声明，采用#ifndef#define#endif的方式进行判断
+当第一次声明时，则执行#ifndef到#endif
+当重复声明时，直接跳转至#endif，执行endif以后的代码；
+define是用于定义声明的名称，一般以大写加下划线以区分其他变量；
+*/
+
+/*源文件coordin.cpp，针对头文件所编写的函数*/
+#include<iostream>
+#include<cmath>
+#include"coordin.h"
+
+using namespace std;
+polar rect_to_polar(rect xypos)
+{
+	polar answer;
+	answer.distance = sqrt(xypos.x*xypos.x + xypos.y*xypos.y);
+	answer.angle = atan2 (xypos.y, xypos.x);
+	return answer;
+}
+
+void show_polar(polar dapos)
+{
+	const double Rad_to_deg = 57.29577951;
+	cout << "distance=" << dapos.distance;
+	cout << ",angle" << dapos.angle*Rad_to_deg;
+	cout << "degrees\n";
+}
+
+/*源文件main.cpp，main函数所在文件*/
+#include<iostream>
+#include<cmath>
+#include"coordin.h"
+
+using namespace std;
+int main(void)
+{
+	rect rplace;
+	polar pplace;
+	cout << "Enter the x and y values:";
+	while (cin >> rplace. x >> rplace.y)
+	{
+		pplace = rect_to_polar(rplace);
+		show_polar(pplace);
+		cout << "Next two numbers (q to quit):";
+	}
+	cout << "Bye!\n";
+	return 0;
+}

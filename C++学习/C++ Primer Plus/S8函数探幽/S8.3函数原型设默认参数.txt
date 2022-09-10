@@ -1,0 +1,38 @@
+#include<iostream>
+const int ArSize = 80;
+char *left(const char *str, int n = 1); //函数原型声明时设置默认参数int n=1
+int main(void)
+{
+	using namespace std;
+	char sample[ArSize];
+	cout << "Enter a string ";
+	cin.get(sample, ArSize);
+	char *ps = left(sample, 4); //使用所输入的n=4运行
+	cout << ps << endl;
+	delete[]ps;
+	ps = left(sample); //使用默认参数的n=1进行运行
+	cout << ps << endl;
+	delete[]ps;
+	return 0;
+}
+
+char *left(const char *str, int n)
+{
+	if (n < 0)
+		n = 0;
+	char *p = new char[n + 1];
+	int i;
+	for (i = 0; i < n && str[i]; i++)
+		p[i] = str[i];
+	while (i < n)
+		p[i++] = '\0';
+	return p;
+}
+
+/*当调用时，参数是从左往右：
+int harpo(int n,int m=4,int j=5)
+不能：beeps=harpo(3, ,8);
+可以：beeps=harpo(2);
+beeps=harpo(1,8);
+beeps=harpo(8,7,6);
+*/
