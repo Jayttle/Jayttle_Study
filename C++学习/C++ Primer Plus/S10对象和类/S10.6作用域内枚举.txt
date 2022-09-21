@@ -1,0 +1,10 @@
+enum egg {Small, Medium, Large, Jumbo};
+enum t_shirt{Small, Medium, Large, Xlarge};
+无法通过编译，因为egg Small与t_shirt Small位于相同的作用域内，因采用：
+enum class egg {Small, Medium, Large, Jumbo};
+enum class t_shirt{Small, Medium, Large, Xlarge};
+也可以用struct代替class；限定了要使用枚举名来限定枚举量；
+egg choice=egg::Large；
+t_shirt Floyd=t_shirt::Large;
+
+枚举enum会隐式的将枚举量自动转化为整型；

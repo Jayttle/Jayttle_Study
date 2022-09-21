@@ -1,0 +1,15 @@
+之所以被称为枚举类型，就是因为命名常量是作为数据类型定义的一部分而枚举或列出的，
+以下是枚举类型声明的示例：
+enum Roster {Tom, Sharon, Bill, Teresa, John};
+Roster student;//声明
+student = Sharon;//赋值 不需要引号直接就当常数使用
+if (student == Sharon) //判断
+student = 1; //错误的使用用法，不能赋值数字
+if (student == Bill)
+if (student == 2)//可以使用==与数字判断 
+默认情况下，枚举列表中的符号将被赋给整数值 0、1、2 等等。
+如果这不合适，则可以指定要赋给的值，如以下示例所示：
+enum Department { factory = 1, sales = 2, warehouse = 4 };必须是整数
+enum Department { factory = 1.1, sales = 2.2, warehouse = 4,4 }; //错误
+enum Colors { red, orange, yellow = 9, green, blue };
+在该示例中，命名常量 red 将被赋值为 0，orange 将为 1，yellow 将为 9，green 将为 10，blue 将为 11。

@@ -1,0 +1,4 @@
+1.函数参数中 *与&
+*使用：char型：void pt(char *str)
+&使用：结构体struct型：void pt(class &bar)
+string型：void to_Upper(string &str)

@@ -1,0 +1,26 @@
+#ifndef COORDIN_H_
+#define COORDIN_H_
+
+struct polar
+{
+	double distance;
+	double angle;
+};
+
+struct rect
+{
+	double x;
+	double y;
+};
+
+polar rect_to_polar(rect xypos);
+void show_polar(polar dapos);
+
+#endif // !COORDIN_H_
+#pragma once
+/*
+为了防止头文件被重复声明，采用#ifndef#define#endif的方式进行判断
+当第一次声明时，则执行#ifndef到#endif
+当重复声明时，直接跳转至#endif，执行endif以后的代码；
+define是用于定义声明的名称，一般以大写加下划线以区分其他变量；
+*/

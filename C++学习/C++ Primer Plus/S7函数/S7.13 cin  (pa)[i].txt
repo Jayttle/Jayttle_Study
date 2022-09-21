@@ -1,0 +1,38 @@
+#include<iostream>
+#include<string>
+#include<array>
+
+using namespace std;
+const int Seasons = 4;
+const char *Snames[] = { "Spring","Summer","Fall","Winter" };
+
+void fill(array<double, Seasons> *pa);
+void show(array<double, Seasons> da);
+
+int main(void)
+{
+	double expenses[Seasons];
+	fill(&expenses);
+	show(expenses);
+}
+
+void fill(array<double, Seasons> *pa)
+{
+
+	for (int i = 0; i < Seasons; i++)
+	{
+		cout << "Enter" << Snames[i] << "expenses:";
+		cin >> (*pa)[i];
+	}
+}
+
+void fill(array<double, Seasons> da)
+{
+	double total = 0.0;
+	cout << "EXPENSES:" << endl;
+	for (int i = 0; i < Seasons; i++)
+	{
+		cout << Snames[i] << ":$" << da[i] << endl;
+
+	}
+}

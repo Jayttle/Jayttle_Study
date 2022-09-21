@@ -1,0 +1,2 @@
+纯虚函数：在虚函数的结尾处为=0
+virtual double Area() const=0;

@@ -1,0 +1,21 @@
+1、静态持续性、外部链接性
+//file01.cpp
+double warming=0.3; //外部声明
+int main()
+{
+	update(0.1); //update有extern double warming，直接赋予0.3,所以此处为0.4
+}
+//file02.cpp
+//使用extern会调用其他文件中的变量，并且其地址相同；
+void update(double dt)
+{
+	extern double warming;
+	warming+=dt;
+}
+
+2.静态持续性、内部链接性
+使用static不会传递到第二个文件中；
+
+3.静态存储持续性、无链接性
+在代码块内部使用static
+

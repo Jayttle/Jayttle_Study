@@ -1,0 +1,13 @@
+1.this指针指向用来调用成员函数的对象
+由此：stock1.topval(stock2)将this设置为stock1对象的地址；
+所有的类方法都将this指针设置为调用它的对象的地址；
+由此：
+const Stock &Stock::topval(const Stock &s) const
+{
+	if(s.total_val>total_val)
+		return s;
+	else 
+		return *this;
+}
+//this 是对象的地址
+//*this 是对象本身

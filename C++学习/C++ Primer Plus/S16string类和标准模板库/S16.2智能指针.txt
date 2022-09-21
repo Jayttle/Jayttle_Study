@@ -1,0 +1,40 @@
+//头文件memory
+三种智能指针：
+auto_ptr
+share_ptr
+unique_ptr
+用法一致：
+auto_ptr<double> pd(new double)
+//智能指针是让指针在构建另外的对象时，能够自动释放内存；
+#include<iostream>
+#include<string>
+#include<memory>
+class Report
+{
+private:
+	std::string str;
+public:
+	Report(const std::string s) :str(s)
+	{
+		std::cout << "Object created!\n";
+	};
+	~Report() { std::cout << "Object deleted!\n"; };
+	void comment() const { std::cout << str << std::endl; };
+};
+
+int main()
+{
+	{
+		std::auto_ptr<Report>ps(new Report("Using auto_ptr"));
+		ps->comment();
+	}
+	{
+		std::shared_ptr<Report>ps(new Report("Using shared_ptr"));
+		ps->comment();
+	}
+	{
+		std::unique_ptr<Report>ps(new Report("using unique_ptr"));
+		ps->comment();
+	}
+	return 0;
+}

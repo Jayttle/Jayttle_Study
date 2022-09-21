@@ -1,0 +1,14 @@
+1.auto_ptr 与 shared_ptr
+在：
+auto_ptr<string> films[5]={...};
+auto_ptr<string> pwin;
+pwin=films[2];
+//发生了错误
+//pwin是auto_ptr,films它将值给了pwin后，pwin把films的指针取代了；
+//因此需要使用shared_ptr才能进行赋值给其他指针
+//差别：
+shared_ptr<string>pwin;
+pwin=films[2];
+
+//如果程序需要使用多个指向同一个对象的指针，应选择shared_ptr;
+//如果不需要 则可使用unique_ptr;

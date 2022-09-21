@@ -1,0 +1,135 @@
+//stock00.h
+#ifndef STOCK00_H_
+#define STOCK00_H_
+
+#include<string>
+class Stock
+{
+private:
+	std::string  company;
+	long shares;
+	double share_val;
+	double total_val;
+	void set_tot() { total_val = shares * share_val; }
+public:
+	Stock();
+	Stock(const std::string &co, long n = 0, double pr = 0.0);
+	~Stock();
+	void acquire(const std::string &co, long n, double pr);
+	void buy(long num, double price);
+	void sell(long num, double price);
+	void update(double price);
+	void show();
+};
+#endif // !STOCK00_H_
+
+
+//stock00.cpp
+#include<iostream>
+#include"stock00.h"
+
+Stock::Stock()
+{
+	std::cout << "Default constructor called\n";
+	company = "no name";
+	shares = 0;
+	share_val = 0.0;
+	total_val = 0.0;
+}
+Stock::Stock(const std::string &co, long n, double pr)
+{
+	std::cout << "Constructor using " << co << " called\n";
+	company = co;
+	if (n < 0)
+	{
+		std::cout << "Number of shares can't be negative;" << company << " shares set to 0.\n";
+		shares = 0;
+	}
+	else shares = n;
+	share_val = pr;
+	set_tot();
+}
+Stock::~Stock()
+{
+	std::cout << "Bye," << company << "\n";
+}
+void Stock::acquire(const std::string &co, long n, double pr)
+{
+	company = co;
+	if (n < 0)
+	{
+		std::cout << "Number of shares can't be negative;" << company << "Shares set to 0.\n";
+		shares = 0;
+	}
+	else
+		shares = n;
+	share_val = pr;
+	set_tot();
+}
+void Stock::buy(long num, double price)
+{
+	if (num < 0)
+	{
+		std::cout << "Number of shares purchased can't be negative" << "Transcation is aborted.\n";
+	}
+	else 
+	{
+		shares += num;
+		share_val = price;
+		set_tot();
+	}
+}
+
+void Stock::sell(long num, double price)
+{
+	using std::cout;
+	if (num < 0)
+	{
+		cout<<"Number of shares sold can't be negative." << "Transcation is aborted.\n";
+	}
+	else if (num > shares)
+	{
+		cout<<"You can't sell more than you have!" << "Transcation is aborted.\n";
+	}
+	else
+	{
+		shares -= num;
+		share_val = price;
+		set_tot();
+	}
+}
+void Stock::update(double price)
+{
+	share_val = price;
+	set_tot();
+}
+
+void Stock::show()
+{
+	std::cout << "Company:" << company
+		<< "Shares:" << shares
+		<< "Share price:$ " << share_val
+		<< "Total Worth:$ " << total_val << "\n";
+}
+
+//usestock.cpp
+#include<iostream>
+#include"stock00.h"
+
+int main(void)
+{
+	Stock fluffy_the_cat;
+
+	fluffy_the_cat.acquire("NanoSmart", 20, 12.50);
+	fluffy_the_cat.show();
+	fluffy_the_cat.buy(15, 18.125);
+	fluffy_the_cat.show();
+	fluffy_the_cat.sell(400, 20.00);
+	fluffy_the_cat.show();
+	fluffy_the_cat.buy(300000, 40.125);
+	fluffy_the_cat.show();
+	fluffy_the_cat.sell(300000, 0.125);
+	fluffy_the_cat.show();
+	return 0;
+
+}

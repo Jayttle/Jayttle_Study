@@ -1,0 +1,14 @@
+//strchr+switch简单的菜单功能
+while(strchr("wstq",choice)==NULL)
+{
+	cout<<"Please enter a w,s,t,,or q: ";
+	cin>>choice;
+}
+if(choice=='q')
+	break;
+switch(choice)
+{	
+	case 'w':
+	case 's':
+	case 't':
+}

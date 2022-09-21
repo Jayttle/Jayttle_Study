@@ -1,0 +1,15 @@
+template<template<typename T>class Thing,typename U,typename V>
+class Crab
+{
+private:
+	Thing<U>s1;
+	Thing<V>s2;
+public:
+	Crab() {};
+	bool push(int a, double x) { return s1.push(a) && s2.push(x); };
+	bool pop(int &a, double &x) { return s1.pop(a) && s2.pop(x); };
+};
+int main()
+{
+	Crab<Stack,double,int> nebula;
+}

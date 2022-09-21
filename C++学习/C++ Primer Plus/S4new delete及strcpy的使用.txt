@@ -1,0 +1,23 @@
+#include<iostream>
+
+struct CandyBar
+{
+	char brand[20];
+	float weight;
+	unsigned int calorie;
+};
+
+int main(void)
+{
+	using namespace std;
+	CandyBar *pt = new CandyBar[3];
+	//pt[0].brand = 'Mocha Munch';  //报错！
+	//strcpy(pt[0].brand, "Mocha Munch")；//正确！要用strcpy来对char型的数据赋值
+	pt[0].weight = 2.3;
+	pt[0].calorie = 350;
+	cout << pt[0].brand << endl;
+	cout << pt[0].weight << endl;
+	cout << pt[0].calorie << endl;
+
+	delete[]pt;
+}

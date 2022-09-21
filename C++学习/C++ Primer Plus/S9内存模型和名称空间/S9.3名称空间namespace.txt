@@ -1,0 +1,113 @@
+//namespace目的：
+//提供一个声明名称的区域，一个名称空间中的名称不会与另外一个名称空间的相同名称发生冲突
+//同时允许程序的其他部分使用该名称空间中声明的东西
+//namesp.h
+#include <string>
+namespace pers
+{
+	struct Person
+	{
+		std::string fname;
+		std::string lname;
+	};
+	void getPerson(Person &);
+	void showPerson(const Person &);
+}
+
+namespace debts
+{
+	using namespace pers;
+	struct Debt
+	{
+		Person name;
+		double amount;
+	};
+	void getDebt(Debt &);
+	void showDebt(const Debt &);
+	double sumDebts(const Debt ar[], int n);
+}
+
+//namesp.cpp
+#include <iostream>	
+#include "namesp.h"
+
+namespace pers
+{
+	using std::cout;
+	using std::cin;
+	void getPerson(Person & rp)
+	{
+		cout << "Enter first name:";
+		cin >> rp.fname;
+		cout << "Enter last name:";
+		cin >> rp.lname;
+	}
+	void showPerson(const Person & rp)
+	{
+		std::cout << rp.lname << "，" << rp.fname;
+	}
+}
+
+namespace debts
+{
+	void getDebt(Debt & rd)
+	{
+		getPerson(rd.name);
+		std::cout << "Enter debt:";
+		std::cin >> rd.amount;
+	}
+	void showDebt(const Debt &rd)
+	{
+		showPerson(rd.name);
+		std::cout << ":$" << rd.amount << std::endl;
+	}
+	double sumDebts(const Debt ar[], int n)
+	{
+		double total = 0;
+		for (int i = 0; i < n; i++)
+			total += ar[i].amount;
+		return total;
+	}
+}
+
+//usenamesp.cpp
+#include<iostream>	
+#include"namesp.h"
+void other(void);
+void another(void);
+int main(void)
+{
+	using debts::Debt;
+	using debts::showDebt;
+	Debt golf = { {"Benny","Goatsniff"},120.0 };
+	showDebt(golf);
+	other();
+	another();
+	return 0;
+}
+void other(void)
+{
+	using std::cout;
+	using std::endl;
+	using namespace debts;
+	Person dg = { "Doodles","Glister" };
+	showPerson(dg);
+	cout << endl;
+	Debt zippy[3];
+	int i;
+	for (i = 0; i < 3; i++)
+	{
+		getDebt(zippy[i]);
+	}
+	for (i = 0; i < 3; i++)
+		showDebt(zippy[i]);
+	cout << "Total debt:$" << sumDebts(zippy, 3) << endl;
+	return;
+}
+void another(void)
+{
+	using pers::Person;
+	Person collector = { "Milo","Rightshift" };
+	pers::showPerson(collector);
+	std::cout << std::endl;
+}

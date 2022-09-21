@@ -1,0 +1,45 @@
+三步：
+1）在类定义的前面声明每个模板函数：
+//模板原型
+template<typename T>void counts();
+template<typename T>void report(T &);
+2）在函数中再次将模板声明为友元，这些语句根据类模板参数的类型声明具体化：
+friend void counts<TT>();
+friend void report<>(HasFriendT<TT> &);
+声明中<>指出模板具体化，对于report 可以为空，因为可以从函数参数推断出模板类型参数；
+单counts函数没有参数，所以休要<TT>来指明其具体化；
+
+#include<iostream>
+using std::cout;
+using std::endl;
+
+//模板原型
+template<typename T>void counts();
+template<typename T>void report(T &);
+//模板类
+template <typename TT>
+class HasFriendT
+{
+private:
+	TT item;
+	static int ct;
+public:
+	HasFriendT(const TT &i) :item(i) { ct++ };
+	~HasFriendT() { ct--; };
+	friend void counts<TT>();
+	friend void report<>(HasFriendT<TT> &);
+};
+template<typename T>
+int HasFriendT<T>::ct = 0;
+
+template<typename T>
+void counts()
+{
+	cout << "template size:" << sizeof(HasFriendT<T>) << ";";
+	cout << "template counts():" << HasFriendT<T>::ct << endl;
+}
+template<typename T>
+void report(T &hf)
+{
+	cout << hf.item << endl;
+}

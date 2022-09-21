@@ -1,0 +1,8 @@
+template<class T1,class T2>
+? type ? gt(T1, x T2 y)
+{
+	...
+	return x + y;
+}
+//无法确定x+y返回的值是什么类型的  因此引用decltype解决
+decltype(x + y) xpy = x + y;//意思是（x+y）的数据类型赋予xpy并且xpy=x+y的计算；

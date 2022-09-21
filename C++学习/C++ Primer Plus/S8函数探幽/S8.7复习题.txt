@@ -1,0 +1,22 @@
+1.哪些函数适合定义为内联函数？
+内联函数（直观的讲就是把函数内的语句放到主函数）
+定义要求：内容较简单，一般需要多次重复调用才会用，不可以是递归函数，不能有循环体，switch语句，不能进行异常接口声明。
+修饰符：inline。需放在函数定义体前，放函数声明前不起作用。
+作用：提高效率，避免了频繁调用函数对栈内存重复开辟所带来的消耗
+副作用：代码膨胀，占内存。
+inline double square(double x)
+{
+	return x * x;
+}
+int main（）
+{
+	a = square(5.0);
+	b = square(4.5 + 7.5);
+}
+
+2.函数默认值的设定：
+void song(const char *name,int times=1);
+
+void  song(const char *name="O.My Papa",int times=1);
+
+答案源：https://zhuanlan.zhihu.com/p/454994197

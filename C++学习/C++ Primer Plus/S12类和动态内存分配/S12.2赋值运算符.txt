@@ -1,0 +1,21 @@
+StringBad & StringBad::operator=(const StringBad &st)
+{
+	if(this==&st)
+		return *this;
+	delete []str;
+	len=st.len;
+	str=new char[len+1];
+	std::strcpy(str,st.str);
+	return *this;
+}
+
+//就是把构造函数几乎重新写一遍
+//构造函数：
+StringBad::StringBad(const char *s)
+{
+	len = std::strlen(s);
+	str = new char[len + 1];
+	std::strcpy(str, s);
+	num_strings++;
+	cout << num_strings << ":\"" << str << "\"object created\n";
+}

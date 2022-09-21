@@ -1,0 +1,21 @@
+//互相为友元
+//Remote方法能够影响tv对象
+//tv方法也能够影响remote对象
+class Tv
+{
+	friend class Remote;
+public:
+	void buzz(Remote &r)
+};
+class Remoto
+{
+	friend class Tv;
+public:
+	void Bool volup(Tv &t)
+	{
+		t.volup();
+	}
+};
+inline void Tv::buzz(Remote &r);
+//对于使用Remote对象的Tv方法，其原型可在Remote类声明之前声明，但必须在Remote
+类声明之后定义，以便编译器有足够的信息来编译该方法。

@@ -1,0 +1,30 @@
+#include<iostream> 
+template<typename T>
+void Swap(T  &a, T &b);
+
+using namespace std;
+int main(void )
+{
+	int i = 10;
+	int j = 20;
+	cout << "i,j=" << i << "," << j << ".\n";
+	cout << "Using compiler-generated int swappper:\n";
+	Swap(i,j);
+	cout<<"Now i,j=" << i << "," << j << ".\n";
+
+	double x = 24.5;
+	double y = 81.7;
+	cout << "x,y=" << x << "," << y<< ".\n";
+	cout << "Using compiler-generated int swappper:\n";
+	Swap(x, y);
+	cout << "Now x,y=" << x << "," << y << ".\n";
+	return 0;
+}
+template<typename T>
+void Swap(T &a, T &b)//template<typename T>不能省略，只作用于紧跟模板后的函数
+{
+	T temp;
+	temp = a;
+	a = b;
+	b = temp;
+}

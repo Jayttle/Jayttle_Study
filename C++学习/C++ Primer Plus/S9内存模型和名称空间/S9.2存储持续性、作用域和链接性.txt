@@ -1,0 +1,63 @@
+C++存储方式是通过 存储连续性、作用域和链接性来描述的；
+1、默认情况下，在函数中声明的函数参数和变量的存储持续性为自动，作用域为局部，没有链接性；
+2、链接性：                                     静态类如何创建：
+外部链接性（可在其他文件中访问）；  在代码块的外部声明
+内部链接性（只能在当前文件中访问）；在代码块的外部声明+static限定符
+无链接性（只能在当前函数或代码块中访问）；在代码块内声明+static限定符
+在函数//无链接性
+void fuc1(int n)
+{
+	static int count=0;
+	int llama=0;
+}
+即使fuc1没有被执行，count也留在内存中。
+
+参考代码：
+#include<iostream>
+void oil(int x);
+using namespace std;
+int  main(void)
+{
+	int texas = 31;
+	int year = 2011;
+	cout << "In main(),taxes=" << texas << ",&texas=";
+	cout << &texas << endl;
+	cout << "In main(),year=" << year << ",&year=";
+	cout << &year << endl;
+	oil(texas);
+	cout << "In main(),taxes=" << texas << ",&texas=";
+	cout << &texas << endl;
+	cout << "In main(),year=" << year << ",&year=";
+	cout << &year << endl;
+	return 0;
+}
+
+void oil(int x)
+{
+	int texas = 5;
+	cout << "In oil(),taxes=" << texas << ",&texas=";
+	cout << &texas << endl;
+	cout << "In oil(),x=" << x << ",&x=";
+	cout << &x << endl;
+	{  //开始一个局部代码
+		int texas = 113;
+		cout << "In block,texas=" << texas;
+		cout << ",&texas=" << &texas << endl;
+		cout << "In block,x=" << x;
+		cout << ",&x=" << &x << endl;
+	} //结束一个局部代码
+	cout << "Post-block texas=" << texas;
+	cout << ",&texas=" << &texas << endl;
+}
+
+/*运行结果：
+In main(),taxes=31,&texas=000000538514F7E4
+In main(),year=2011,&year=000000538514F804
+In oil(),taxes=5,&texas=000000538514F6A4
+In oil(),x=31,&x=000000538514F7C0
+In block,texas=113,&texas=000000538514F6C4
+In block,x=31,&x=000000538514F7C0
+Post-block texas=5,&texas=000000538514F6A4
+In main(),taxes=31,&texas=000000538514F7E4
+In main(),year=2011,&year=000000538514F804
+*/

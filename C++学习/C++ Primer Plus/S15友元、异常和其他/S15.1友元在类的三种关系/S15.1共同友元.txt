@@ -1,0 +1,17 @@
+class Analyzer;//forward declaration
+class Probe
+{
+	friend void sync(Analyzer &a, const Probe &p);//sync a to p
+	friend void sync(Probe &p, const Analyzer &a);//sync p to a
+};
+class Analyzer
+{
+	friend void sync(Analyzer &a, const Probe &p);//sync a to p
+	friend void sync(Probe &p, const Analyzer &a);//sync p to a
+};
+
+inline void sync(Analyzer &a, const Probe)
+{
+	....
+}
+inline void sync(Probe &p, const Analyzer &a)

@@ -1,0 +1,52 @@
+#include<iostream>
+void swapr(int &a, int &b);
+void swapp(int *p, int *q);
+void swapv(int a, int b);
+int main(void)
+{
+	using namespace std;
+	int wallet1 = 300;
+	int wallet2 = 350;
+	cout << "wallet1=$" << wallet1;
+	cout << "wallet2=$" << wallet2 << endl;
+
+	cout << "using references to swap contents:" << endl;
+	swapr(wallet1, wallet2);
+	cout << "wallet1=$" << wallet1;
+	cout << "wallet2=$" << wallet2 << endl;
+
+	cout << "using pointers to swap contents:" << endl;
+	swapp(&wallet1, &wallet2);
+	cout << "wallet1=$" << wallet1;
+	cout << "wallet2=$" << wallet2 << endl;
+
+
+	cout << "Trying to use passing by values :" << endl;
+	swapv(wallet1, wallet2);
+	cout << "wallet1=$" << wallet1;
+	cout << "wallet2=$" << wallet2 << endl;
+}
+
+void swapr(int &a, int &b)
+{
+	int temp;
+	temp = a;
+	a = b;
+	b = temp;
+}
+
+void swapp(int *p, int *q)
+{
+	int temp;
+	temp = *p;
+	*p = *q;
+	*q = temp;
+}
+
+void swapv(int a, int b)
+{
+	int temp;
+	temp = a;
+	a = b;
+	b = temp;
+}
